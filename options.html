@@ -1,0 +1,212 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHRN Trading - Options</title>
+    <link rel="stylesheet" href="chrn.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <h1>Now, lets configure your purchase.</h1> <br>
+    <h2>iPhone Model: <select id="dropdownMenu" onchange="handleDropdownChange()">
+        <option value="1">iPhone 5S - $30 or more</option>
+        <option value="2">iPhone 6 - $35 or more</option>
+        <option value="3">iPhone 6S - $40 or more</option>
+        <option value="4">iPhone SE 1 - $35 or more</option>
+        <option value="5">iPhone 7 - $50 or more</option>
+        <option value="6">iPhone 8 - $80 or more</option>
+        <option value="7">iPhone X - $100 or more</option>
+        <option value="8">iPhone XR - $100 or more</option>
+        <option value="9">iPhone XS - $100 or more</option>
+        <option value="10">iPhone SE 2 - $135 or more</option>
+        <option value="11">iPhone 11 - $150 or more</option>
+        <option value="12">iPhone SE 3 - $170 or more</option>
+    </select>
+    
+    <!-- Display selected option -->
+    <p id="selectedOption">You selected: </p>
+    
+    <!-- JavaScript code to handle dropdown change -->
+    <script>
+        function handleDropdownChange() {
+            // Get the selected value from the dropdown
+            var selectedOption = document.getElementById("dropdownMenu");
+        var selectedText = selectedOption.options[selectedOption.selectedIndex].text;
+    
+            // Display the selected option
+            document.getElementById("selectedOption").innerText = "You selected: " + selectedText;
+        }
+    </script>
+    </h2>
+    <h2> Now, configure the model you want.</h2>
+<!-- HTML code for the dropdown menus -->
+<h2>Storage: </h2>
+<select id="storageMenu" onchange="handleDropdownChange()">
+    <option value="16GB">16GB</option>
+    <option value="32GB">32GB</option>
+    <option value="64GB">64GB</option>
+    <option value="128GB">128GB</option>
+    <option value="256GB">256GB</option>
+    <option value="512GB">512GB</option>
+</select>
+
+<!-- Display text based on compatibility -->
+<p id="compatibilityText">Storage Compatibility status: Compatible</p>
+
+<h2>Color: </h2>
+<select id="colorMenu" onchange="handleDropdownChange()">
+    <option value="SG">Space Gray</option>
+    <option value="S">Silver</option>
+    <option value="G">Gold</option>
+    <option value="RG">Rose Gold</option>
+    <option value="R">Product Red</option>
+    <option value="B">Black</option>
+    <option value="JB">Jet Black</option>
+    <option value="BL">Blue</option>
+    <option value="W">White</option>
+    <option value="Y">Yellow</option>
+    <option value="CO">Coral</option>
+    <option value="GR">Green</option>
+    <option value="P">Purple</option>
+    <option value="MI">Midnight</option>
+    <option value="ST">Starlight</option>
+</select>
+
+<!-- Display text based on compatibility -->
+<p id="compatibilityTextColors">Color Compatibility status: Compatible</p>
+
+<h2>Model Type: </h2>
+<select id="modelTypeMenu" onchange="handleDropdownChange()">
+    <option value="N">Normal</option>
+    <option value="PL">Plus</option>
+    <option value="M">Max</option>
+</select>
+
+<!-- Display text based on compatibility -->
+<p id="compatibilityTextModelOpt2">Model Type Compatibility status: Compatible</p>
+
+<a href="compose.html" id="newPageLink">Go to New Page</a>
+
+<!-- Your JavaScript code -->
+<script>
+    function handleDropdownChange() {
+        validateStorageOptions();
+        validateColorOptions();
+        validateModelOptions();
+        updateNewPageLink();
+    }
+
+    function validateStorageOptions() {
+        var selectedOption = document.getElementById("dropdownMenu");
+        var selectedStorageMenu = document.getElementById("storageMenu");
+        var compatibilityText = document.getElementById("compatibilityText");
+
+        var selectedValue = selectedOption.options[selectedOption.selectedIndex].value;
+        var selectedStorageOption = selectedStorageMenu.options[selectedStorageMenu.selectedIndex].value;
+
+        var validStorageOptions = {
+            1: ["16GB", "32GB", "64GB"],
+            2: ["16GB", "32GB", "64GB", "128GB"],
+            3: ["16GB", "32GB", "64GB", "128GB"],
+            4: ["16GB", "32GB", "64GB", "128GB"],
+            5: ["32GB", "128GB"],
+            6: ["64GB", "128GB"],
+            7: ["64GB", "256GB"],
+            8: ["64GB", "128GB", "256GB"],
+            9: ["64GB", "256GB", "512GB"],
+            10: ["64GB", "128GB", "256GB"],
+            11: ["64GB", "128GB"],
+            12: ["64GB", "128GB", "256GB"]
+        };
+
+        var isCompatible = validStorageOptions[selectedValue].includes(selectedStorageOption);
+        updateCompatibilityText(compatibilityText, isCompatible);
+    }
+
+    function validateColorOptions() {
+        var selectedOption = document.getElementById("dropdownMenu");
+        var selectedColorMenu = document.getElementById("colorMenu");
+        var compatibilityTextColors = document.getElementById("compatibilityTextColors");
+
+        var selectedValue = selectedOption.options[selectedOption.selectedIndex].value;
+        var selectedColorOption = selectedColorMenu.options[selectedColorMenu.selectedIndex].value;
+
+        var validColorOptions = {
+            1: ["SG", "S", "G"],
+            2: ["SG", "S", "G"],
+            3: ["SG", "S", "G", "RG"],
+            4: ["SG", "S", "G", "RG"],
+            5: ["S", "G", "RG", "R", "JB", "B"],
+            6: ["SG", "S", "G", "R"],
+            7: ["SG", "S"],
+            8: ["BL", "Y", "CO", "R"],
+            9: ["SG", "S", "G"],
+            10: ["R", "W", "B"],
+            11: ["G", "R", "B", "W", "GR", "P"],
+            12: ["R", "MI", "ST"]
+        };
+
+        var isCompatible = validColorOptions[selectedValue].includes(selectedColorOption);
+        updateCompatibilityText(compatibilityTextColors, isCompatible);
+    }
+
+    function validateModelOptions() {
+        var selectedOption = document.getElementById("dropdownMenu");
+        var selectedModelMenu = document.getElementById("modelTypeMenu");
+        var compatibilityTextModelOpt2 = document.getElementById("compatibilityTextModelOpt2");
+
+        var selectedValue = selectedOption.options[selectedOption.selectedIndex].value;
+        var selectedModelTypeOption = selectedModelMenu.options[selectedModelMenu.selectedIndex].value;
+
+        var validModelOptions = {
+            1: ["N"],
+            2: ["N", "PL"],
+            3: ["N", "PL"],
+            4: ["N"],
+            5: ["N", "PL"],
+            6: ["N", "PL"],
+            7: ["N"],
+            8: ["N"],
+            9: ["N", "M"],
+            10: ["N"],
+            11: ["N"],
+            12: ["N"]
+        };
+
+        var isCompatible = validModelOptions[selectedValue].includes(selectedModelTypeOption);
+        updateCompatibilityText(compatibilityTextModelOpt2, isCompatible);
+    }
+
+    function updateCompatibilityText(element, isCompatible) {
+        if (isCompatible) {
+            element.innerText = 'Compatibility status: Compatible';
+        } else {
+            element.innerText = 'Compatibility status: Not compatible';
+        }
+    }
+
+    function updateNewPageLink() {
+        var selectedOption = document.getElementById("dropdownMenu");
+        var selectedColorMenu = document.getElementById("colorMenu");
+        var selectedModelMenu = document.getElementById("modelTypeMenu");
+        var selectedStorageOption = document.getElementById("storageMenu");
+        var newPageLink = document.getElementById("newPageLink");
+        var prep = document.getElementById("prep")
+
+        var selectedDropdownOption = selectedOption.options[selectedOption.selectedIndex].text;
+        var selectedColorOption = selectedColorMenu.options[selectedColorMenu.selectedIndex].text;
+        var selectedModelTypeOption = selectedModelMenu.options[selectedModelMenu.selectedIndex].text;
+        var selectedStorageOptionText = selectedStorageOption.options[selectedStorageOption.selectedIndex].text;
+
+        // Adjust the regular expression to properly remove storage details
+        var cleanedDropdownOption = selectedDropdownOption.replace(/(\s*-\s*\$[\d,]+ or more)$/i, '');
+
+        // Update the href attribute with selected options as parameters
+        newPageLink.href = "compose.html?model=" + encodeURIComponent(cleanedDropdownOption.trim()) +
+                           "&color=" + encodeURIComponent(selectedColorOption) +
+                           "&type=" + encodeURIComponent(selectedModelTypeOption) +
+                           "&storage=" + encodeURIComponent(selectedStorageOptionText);
+    }
+</script>
+</body>
+</html>

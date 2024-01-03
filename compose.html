@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHRN Trading - Compose and Buy</title>
+    <link rel="stylesheet" href="chrn.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Display the selected options from the URL parameters -->
+    <h2>Review your choice.</h2>
+    <p id="selectedOptionsOnNewPage"></p>
+
+    <!-- Your content for the new page -->
+
+    <!-- Your JavaScript code for handling the selected options -->
+    <script>
+        // Retrieve selected options from the URL parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var model = urlParams.get('model');
+        var color = urlParams.get('color');
+        var type = urlParams.get('type');
+        var storage = urlParams.get('storage')
+    
+        // Display the selected options in the paragraph
+        var selectedOptionsOnNewPage = document.getElementById("selectedOptionsOnNewPage");
+    
+        if (model && color && type && storage) {
+            selectedOptionsOnNewPage.textContent =
+                "Does this look right?" + "\n" + model + "\n" + type + "\n" + "in" + "\n" + "\n" + color + "\n" + "with" + "\n" + storage + "\n" + "Storage";
+        } else {
+            selectedOptionsOnNewPage.textContent = "Options incompatible or none provided.";
+        }
+    </script>    
+     <button onclick="redirectToPrep()">Purchase</button>
+
+     <!-- JavaScript code to handle the redirection -->
+     <script>
+         function redirectToPrep() {
+             // Replace "site.html" with the actual path or URL
+             window.location.href = "prepare.html";
+         }
+     </script>
+</body>
+</html>
